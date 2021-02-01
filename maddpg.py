@@ -148,7 +148,7 @@ class MADDPG:
             # Reset OU noise 
             for ddpg_agent in self.maddpg_agent:
                 ddpg_agent.noise.reset()            
-                 
+
             for agent_i in range(self.N_agents): # loop agents
                 samples = self.buffer.sample(BATCH_SIZE)
                 self.update(samples, agent_i, self.logger)
@@ -168,8 +168,16 @@ class MADDPG:
                             'critic_params' : self.maddpg_agent[i].critic.state_dict(),
                             'critic_optim_params' : self.maddpg_agent[i].critic_optimizer.state_dict()}
             save_dict_list.append(save_dict)
-            torch.save(save_dict_list, os.path.join(model_dir, filename + '-episode-{}.pt'.format(episode)))
+        torch.save(save_dict_list, os.path.join(model_dir, filename + '-episode-{}.pt'.format(episode)))
 
     # load saved model
     def load_model(self, filename):
-        torch.load(filename)
+        checkpointList = torch.load(filename)     
+        for i in range(self.N_agents):
+            checkpoint = checkpointList[i]
+            self.maddpg_agent[i].actor.load_state_dict(checkpoint['actor_params'])
+            self.maddpg_agent[i].actor_optimizer.load_state_dict(checkpoint['actor_optim_params'])
+            self.maddpg_agent[i].critic.load_state_dict(checkpoint['critic_params'])
+            self.maddpg_agent[i].critic_optimizer.load_state_dict(checkpoint['critic_optim_params'])
+        
+        return checkpointList

@@ -13,8 +13,8 @@ def train_agents(agents, env, brain_name, n_episodes, target_score=0.5):
    
     # amplitude of OU noise
     # this slowly decreases to 0
-    noiseAmp = 1.2
-    noise_reduction = 0.9998
+    noiseAmp = 2.5
+    noise_reduction = 0.9997
     noise_lim = noiseAmp*0.05
     print_steps = 100
 
@@ -53,12 +53,11 @@ def train_agents(agents, env, brain_name, n_episodes, target_score=0.5):
         if i_episode % print_steps == 0:
             end = time.time()    
             mean_score = np.mean(scores[-print_steps:])
-            print(" ")
             print('\rEpisode {}\tAverage Score: {:.3f} \tTime/episode: {:.2f}'.format(i_episode, mean_score, (end-start)/print_steps, end=""))
             start = end
             if mean_score >target_score:
                 name = "MADDPG_V1_Score_{:.2f}".format(mean_score)
-                maddpg.save_model(name, i_episode)
+                agents.save_model(name, i_episode)
                 target_score = mean_score      
                 print('Agent saved! file="MADDPG_V1_Score_{:.2f}"'.format(mean_score))
 
@@ -74,17 +73,17 @@ if __name__ == "__main__":
     brain = env.brains[brain_name]
 
        # train parameters
-    n_episodes = 1000
+    n_episodes = 3500
     save_score = 0.5
 
     # create agent
     maddpg = MADDPG()
 
     load = False    # Load saved model
-    filename = "DDPG_Score_37.8.pth"
+    load_filename = "p3_collab-compet/model_dir/MADDPG_V1_Score_0.98-episode-3400.pt"
     # Load model
     if load:
-        maddpg.load_model(filename)
+        maddpg.load_model(load_filename)
 
     scores = train_agents(maddpg, env, brain_name, n_episodes, target_score=save_score)
 

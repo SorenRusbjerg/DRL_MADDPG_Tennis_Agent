@@ -22,14 +22,15 @@ Create function to map (agent, states) = np(2, 24)  -> [tensor(1,obs_full), tens
 * ~~Insert batchnorm layer~~ No effect seen
 * ~~Leaky relu~~ No effect seen
 * ~~Remove output normaliztion~~ No effect seen
-* Appply parameters from https://github.com/rhemon/p3_CollaborationCompetition/blob/master/Report.ipynb or https://knowledge.udacity.com/questions/315134
-* Insert hyper parameters IN MADDPG
+* ~~Try with parameters from https://github.com/rhemon/p3_CollaborationCompetition/blob/master/Report.ipynb or https://knowledge.udacity.com/questions/315134~~
+* ~~Insert hyper parameters IN MADDPG~~
 * Cleanup jup.nb 
-* jup. nb move code to .py files
+* ~~jup. nb move code to .py files~~
 * ~~insert saving agents~~
-* insert loading agents
+* ~~insert loading agents~~
 * ~~Fix score to use max~~
 * Fix save gif images
+* Get tensorboard to work
 
 
 
