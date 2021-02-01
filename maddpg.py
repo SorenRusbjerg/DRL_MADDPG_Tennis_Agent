@@ -11,13 +11,17 @@ from buffer import ReplayBuffer
 from tensorboardX import SummaryWriter
 import os
 
-BUFFER_SIZE         = 1e5
-BATCH_SIZE          = 128
-STEPS_PER_UPDATE    = 2
-LR_ACTOR            = 0.5e-4
-LR_CRITIC           = 0.5e-3
-TAU                 = 0.001
-DISCOUNT_FACTOR     = 0.99
+BUFFER_SIZE         = 1e5       # replay buffer size
+BATCH_SIZE          = 128       # minibatch size
+STEPS_PER_UPDATE    = 2         # Nr of steps before agent update
+LR_ACTOR            = 0.5e-4    # learning rate of the actor
+LR_CRITIC           = 0.5e-3    # learning rate of the critic
+TAU                 = 0.001     # for soft update of target parameters
+DISCOUNT_FACTOR     = 0.99      # or Gamma
+ACTOR_FC1           = 256       # 1 actor layer neurons
+ACTOR_FC2           = 128       # 2 actor layer neurons
+CRITIC_FC1          = 256       # 1 critic layer neurons
+CRITIC_FC2          = 128       # 2 critic layer neurons
 
 log_path = os.getcwd()+"/log" # tensorBoard log
 
@@ -32,8 +36,8 @@ class MADDPG:
         # actor input = obs_full = 2*24
         # critic out = 1 Hardcoded        
         n_acts = self.N_actions*self.N_agents
-        self.maddpg_agent = [DDPGAgent(NN_pars_actor=(self.all_states, 256, 128, self.N_actions), NN_pars_critic=(self.all_states, n_acts, 256, 128), device=device, lr_actor=LR_ACTOR, lr_critic=LR_CRITIC), 
-                             DDPGAgent(NN_pars_actor=(self.all_states, 256, 128, self.N_actions), NN_pars_critic=(self.all_states, n_acts, 256, 128),device=device, lr_actor=LR_ACTOR, lr_critic=LR_CRITIC)]
+        self.maddpg_agent = [DDPGAgent(NN_pars_actor=(self.all_states, ACTOR_FC1, ACTOR_FC2, self.N_actions), NN_pars_critic=(self.all_states, n_acts, CRITIC_FC1, CRITIC_FC2), device=device, lr_actor=LR_ACTOR, lr_critic=LR_CRITIC), 
+                             DDPGAgent(NN_pars_actor=(self.all_states, ACTOR_FC1, ACTOR_FC2, self.N_actions), NN_pars_critic=(self.all_states, n_acts, CRITIC_FC1, CRITIC_FC2), device=device, lr_actor=LR_ACTOR, lr_critic=LR_CRITIC)]
         
         self.discount_factor = discount_factor
         self.tau = tau
