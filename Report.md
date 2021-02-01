@@ -77,7 +77,7 @@ The critic model, in contrast to the paper description, recieves its action inpu
 ## Agent results
 
 In the end the agent got an average score of 0.53 after 2900 episodes and 1.13 after 3700 episodes of tennis games.
-A training example is given in `./Tennis_training.html`.
+A training example is given in `./Tennis_training.html`, see [link](https://raw.githack.com/SorenRusbjerg/DRL_MADDPG_Tennis_Agent/master/Tennis_training.html).
 
 
 
