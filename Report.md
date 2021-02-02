@@ -1,7 +1,8 @@
 # Initial agent
 In this project a MADDPG agent is implemented. The agent consist of two DDPG agents with critics that share experiences, states and actions from both models. 
 
-The algorithm is based on the [MADDPG paper](https://papers.nips.cc/paper/2017/file/68a9750337a418a86fe06c1991a1d64c-Paper.pdf), and the implementation have borrowed code from the Udacity "MADDPG - Lab" exercise. 
+The algorithm is based on the [MADDPG paper](https://papers.nips.cc/paper/2017/file/68a9750337a418a86fe06c1991a1d64c-Paper.pdf), and the implementation have borrowed code from the Udacity ["MADDPG - Lab" exercise](https://classroom.udacity.com/nanodegrees/nd893/parts/ec710e48-f1c5-4f1c-82de-39955d168eaa/modules/29462d31-10e3-4834-8273-45df5588bf7d/lessons/a6347d5b-55f0-45cd-bab2-308f877d79a7/concepts/475be8a3-68d3-42ed-8605-90c905d88ab0).
+
 
 # Final implementation
 ## MADDPG Code layout

@@ -1,13 +1,14 @@
 # individual network settings for each actor + critic pair
 # see networkforall for details
 
+# This module is based on Udacity exercise 
+https://classroom.udacity.com/nanodegrees/nd893/parts/ec710e48-f1c5-4f1c-82de-39955d168eaa/modules/29462d31-10e3-4834-8273-45df5588bf7d/lessons/a6347d5b-55f0-45cd-bab2-308f877d79a7/concepts/475be8a3-68d3-42ed-8605-90c905d88ab0
+
 from networkforall import Network
 from utilities import hard_update, gumbel_softmax, onehot_from_logits
 from torch.optim import Adam
 import torch
 import numpy as np
-
-
 
 # add OU noise for exploration
 from OUNoise import OUNoise
